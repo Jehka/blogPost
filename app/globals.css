@@ -1,66 +1,133 @@
 /* Reset */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
-  background: #0a0a0a;
-  color: #e7e7e7;
+  background: #121212;
+  color: #e7e5e4;
   font-family: Georgia, "Times New Roman", serif;
 }
 
 /* Layout */
 .container {
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 64px 24px;
+  padding: 80px 20px;
 }
 
 /* Title */
-.site-title {
-  font-size: 56px;
-  font-weight: 600;
-  margin-bottom: 64px;
-  letter-spacing: -0.5px;
-}
-
-/* Post card */
-.post {
-  margin-bottom: 64px;
+h1 {
+  font-size: 52px;
+  letter-spacing: -1px;
+  margin-bottom: 48px;
 }
 
 /* Post title */
-.post-title {
-  font-size: 34px;
-  line-height: 1.2;
-  margin-bottom: 12px;
-  text-decoration: none;
-  color: #dcdcdc;
-  transition: all 0.2s ease;
-}
-
-.post-title:hover {
-  color: #a78bfa;
+h2 {
+  font-size: 30px;
+  line-height: 1.3;
 }
 
 /* Meta */
 .meta {
-  font-size: 14px;
   color: #9ca3af;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* Links */
+a {
+  color: #c4b5fd;
+  text-decoration: none;
+  position: relative;
+}
+
+/* Underline animation */
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1px;
+  background: #c4b5fd;
+  transition: width 0.25s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* Posts */
+.post {
+  margin-bottom: 64px;
+  transition: transform 0.2s ease;
+}
+
+.post:hover {
+  transform: translateY(-2px);
+}
+
+/* ARTICLE (this is the magic) */
+article {
+  margin-top: 32px;
+}
+
+article p {
+  font-size: 19px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+  color: #d6d3d1;
+}
+
+article h1 {
+  font-size: 38px;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+article h2 {
+  font-size: 28px;
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+article h3 {
+  font-size: 22px;
+  margin-top: 28px;
   margin-bottom: 10px;
 }
 
-/* Tags */
-.tags {
-  font-size: 15px;
-  color: #bdbdbd;
-  margin-bottom: 6px;
+article ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
-/* Status */
-.status {
-  font-size: 13px;
-  color: #6b7280;
+article li {
+  margin-bottom: 10px;
+}
+
+article blockquote {
+  border-left: 3px solid #444;
+  padding-left: 16px;
+  color: #aaa;
+  margin: 28px 0;
+  font-style: italic;
+}
+
+article code {
+  background: #1a1a1a;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+article pre {
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 24px;
 }
