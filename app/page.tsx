@@ -1,45 +1,52 @@
-import Link from "next/link";
 import { getPosts } from "@/lib/posts";
+import Link from "next/link";
 
-export default async function Home() {
+export default async function HomePage() {
   const posts = await getPosts();
 
-  // 🔥 group posts by tags dynamically
+  // ===== GROUP BY TAGS (SAFE) =====
   const grouped: Record<string, any[]> = {};
 
   posts.forEach((post) => {
-    const tags = post.tags?.length ? post.tags : ["writing"];
+    const tags = post.tags || [];
+
+    // if no tags → skip (no "other" nonsense)
+    if (!tags.length) return;
 
     tags.forEach((tag: string) => {
-      const key = tag.toLowerCase();
-
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(post);
+      if (!grouped[tag]) grouped[tag] = [];
+      grouped[tag].push(post);
     });
   });
 
   return (
     <main className="home">
-      <h1 className="home-title">Theology Subtext</h1>
+      {/* BACKGROUND */}
+      <div className="bg-layer" />
 
-      {Object.entries(grouped).map(([tag, posts]) => (
-        <section key={tag} className="home-section">
-          <h2 className="section-title">{tag}</h2>
+      {/* CONTENT */}
+      <div className="home-content">
+        <h1 className="home-title">Theology Subtext</h1>
 
-          <div className="post-list">
+        {Object.entries(grouped).map(([tag, posts]) => (
+          <section key={tag} className="home-section">
+            <h2 className="home-tag">{tag}</h2>
+
             {posts.map((post: any) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="post-item"
+                className="home-link"
               >
-                <div className="post-name">{post.title}</div>
-                <div className="post-date">{post.date}</div>
+                <div className="home-post">
+                  <h3>{post.title}</h3>
+                  {post.date && <p>{post.date}</p>}
+                </div>
               </Link>
             ))}
-          </div>
-        </section>
-      ))}
+          </section>
+        ))}
+      </div>
     </main>
   );
 }
