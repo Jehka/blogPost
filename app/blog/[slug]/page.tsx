@@ -9,12 +9,12 @@ export default async function BlogPost({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // ✅ unwrap params (NEW Next.js requirement)
   const { slug } = await params;
 
   const posts = await getPosts();
 
-  const cleanSlug = slug.toLowerCase().trim();
+  const cleanSlug =
+    typeof slug === "string" ? slug.toLowerCase().trim() : "";
 
   const post = posts.find((p) => p.slug === cleanSlug);
 
@@ -24,8 +24,12 @@ export default async function BlogPost({
     block_id: post.pageId,
   });
 
+  const isPoetry = post.tags?.some(
+    (t: string) => t.toLowerCase() === "poetry"
+  );
+
   return (
-    <main className="post-container">
+    <main className={isPoetry ? "post-container poetry-page" : "post-container"}>
       <Link href="/" className="back">
         ← Back
       </Link>
@@ -33,8 +37,14 @@ export default async function BlogPost({
       <h1 className="post-title">{post.title}</h1>
       <p className="post-date">{post.date}</p>
 
-      <article className="post-content">
-        {renderBlocks(blocks.results)}
+      <article
+        className={
+          isPoetry
+            ? "post-content poetry centered-poetry"
+            : "post-content"
+        }
+      >
+        {renderBlocks(blocks.results, isPoetry)}
       </article>
     </main>
   );

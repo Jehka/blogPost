@@ -1,5 +1,13 @@
 import { notion } from "./notion";
 
+function generateSlug(text: string) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]/g, "");
+}
+
 export async function getPosts() {
   const response = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
@@ -16,26 +24,36 @@ export async function getPosts() {
   });
 
   return response.results.map((post: any) => {
-    const slugProp = post.properties.Slug;
+    const title =
+      post.properties.Title?.title?.[0]?.plain_text || "Untitled";
 
-    let slug = "";
+    const slugRaw =
+      post.properties.Slug?.rich_text?.[0]?.plain_text || title;
 
-    if (slugProp?.type === "rich_text") {
-      slug = slugProp.rich_text?.[0]?.plain_text || "";
-    }
+    const slug = generateSlug(slugRaw);
 
     const tags =
       post.properties.Tags?.multi_select?.map((t: any) =>
         t.name.toLowerCase()
       ) || [];
 
+    // 🔥 COVER IMAGE (Notion)
+    let cover = null;
+
+    if (post.cover?.external?.url) {
+      cover = post.cover.external.url;
+    } else if (post.cover?.file?.url) {
+      cover = post.cover.file.url;
+    }
+
     return {
       id: post.id,
       pageId: post.id,
-      slug: slug.trim().toLowerCase(),
-      title: post.properties.Title?.title?.[0]?.plain_text || "Untitled",
+      slug,
+      title,
       date: post.properties.Date?.date?.start || "",
-      tags, // ✅ important
+      tags,
+      cover, // ✅ new
     };
   });
 }

@@ -1,8 +1,9 @@
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "Oshio",
-  description: "Personal blog",
+  title: "Theology Subtext",
+  description: "A personal space for poetry and writing",
 };
 
 export default function RootLayout({
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
