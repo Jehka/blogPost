@@ -1,67 +1,40 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getPosts } from "@/lib/posts";
 import { notion } from "@/lib/notion";
-import { NotionToMarkdown } from "notion-to-md";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import Link from "next/link";
+import { renderBlocks } from "@/lib/renderer";
 
-export async function generateStaticParams() {
-  const posts = await getPosts();
-
-  return posts
-    .filter((p) => p.slug) // 🚨 ensures no empty slugs
-    .map((post) => ({
-      slug: post.slug,
-    }));
-}
-
-export default async function PostPage({
+export default async function BlogPost({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // ✅ CORRECT way for Next 16
+  // ✅ unwrap params (NEW Next.js requirement)
   const { slug } = await params;
-
-  console.log("URL SLUG:", slug); // DEBUG
 
   const posts = await getPosts();
 
-  console.log("ALL SLUGS:", posts.map((p) => p.slug)); // DEBUG
+  const cleanSlug = slug.toLowerCase().trim();
 
-  const post = posts.find((p) => p.slug === slug);
+  const post = posts.find((p) => p.slug === cleanSlug);
 
-  if (!post) {
-    return (
-      <main style={{ padding: "40px", color: "white", background: "#111", minHeight: "100vh" }}>
-        <h1>Post not found</h1>
-        <p>Slug: {slug}</p>
-        <Link href="/">← Back</Link>
-      </main>
-    );
-  }
+  if (!post) return notFound();
 
-  const n2m = new NotionToMarkdown({ notionClient: notion });
-  const mdBlocks = await n2m.pageToMarkdown(post.pageId);
-  const mdString = n2m.toMarkdownString(mdBlocks);
+  const blocks = await notion.blocks.children.list({
+    block_id: post.pageId,
+  });
 
   return (
-    <main style={{ padding: "40px", background: "#111", color: "#e5e5e5", minHeight: "100vh" }}>
-      <Link href="/" style={{ color: "#aaa" }}>
+    <main className="post-container">
+      <Link href="/" className="back">
         ← Back
       </Link>
 
-      <h1 style={{ fontSize: "56px", marginTop: "20px" }}>{post.title}</h1>
-      <p style={{ color: "#888" }}>{post.date}</p>
+      <h1 className="post-title">{post.title}</h1>
+      <p className="post-date">{post.date}</p>
 
-      <article style={{ marginTop: "40px", lineHeight: 1.8 }}>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
-        >
-          {mdString.parent}
-        </ReactMarkdown>
+      <article className="post-content">
+        {renderBlocks(blocks.results)}
       </article>
     </main>
   );

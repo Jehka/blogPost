@@ -1,24 +1,42 @@
-import { getPosts } from "@/lib/posts";
 import Link from "next/link";
+import { getPosts } from "@/lib/posts";
 
 export default async function Home() {
   const posts = await getPosts();
 
+  // group posts by tags
+  const groups: Record<string, typeof posts> = {};
+
+  posts.forEach((post) => {
+    if (!post.tags || post.tags.length === 0) {
+      if (!groups["writing"]) groups["writing"] = [];
+      groups["writing"].push(post);
+      return;
+    }
+
+    post.tags.forEach((tag) => {
+      if (!groups[tag]) groups[tag] = [];
+      groups[tag].push(post);
+    });
+  });
+
   return (
-    <main style={{ padding: "40px", background: "#111", minHeight: "100vh", color: "white" }}>
-      <h1 style={{ fontSize: "60px", marginBottom: "40px" }}>Oshio</h1>
+    <main className="home">
+      <h1 className="title">Oshio</h1>
 
-      {posts.map((post) => (
-        <div key={post.id} style={{ marginBottom: "30px" }}>
-          <Link
-            href={`/blog/${post.slug}`}
-            style={{ fontSize: "28px", color: "#a78bfa", textDecoration: "underline" }}
-          >
-            {post.title}
-          </Link>
+      {Object.entries(groups).map(([group, posts]) => (
+        <section key={group} className="section">
+          <h2 className="section-title">{group}</h2>
 
-          <p style={{ color: "#888" }}>{post.date}</p>
-        </div>
+          <div className="post-list">
+            {posts.map((post) => (
+              <Link key={post.id} href={`/blog/${post.slug}`} className="post">
+                <div className="post-title">{post.title}</div>
+                <div className="post-date">{post.date}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
       ))}
     </main>
   );

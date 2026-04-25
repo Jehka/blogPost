@@ -1,3 +1,10 @@
+import "./globals.css";
+
+export const metadata = {
+  title: "Oshio",
+  description: "Personal blog",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -5,9 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ background: "black", color: "#e5e5e5" }}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

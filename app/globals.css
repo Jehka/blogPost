@@ -1,133 +1,186 @@
-/* Reset */
-* {
-  box-sizing: border-box;
+:root {
+  --bg: #0d0d0d;
+  --text: #e8e6e3;
+  --muted: #9c9c9c;
+  --accent: #b892ff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Georgia", serif;
   margin: 0;
-  padding: 0;
 }
 
-html, body {
-  background: #121212;
-  color: #e7e5e4;
-  font-family: Georgia, "Times New Roman", serif;
+/* layout */
+.home {
+  max-width: 680px;
+  margin: 120px auto;
+  padding: 0 20px;
 }
 
-/* Layout */
-.container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 80px 20px;
+/* title */
+.title {
+  font-size: 72px;
+  margin-bottom: 80px;
+  text-align: center;
 }
 
-/* Title */
-h1 {
-  font-size: 52px;
-  letter-spacing: -1px;
-  margin-bottom: 48px;
+/* sections */
+.section {
+  margin-bottom: 60px;
 }
 
-/* Post title */
-h2 {
-  font-size: 30px;
-  line-height: 1.3;
-}
-
-/* Meta */
-.meta {
-  color: #9ca3af;
-  font-size: 14px;
-  margin-top: 6px;
-}
-
-/* Links */
-a {
-  color: #c4b5fd;
-  text-decoration: none;
-  position: relative;
-}
-
-/* Underline animation */
-a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 1px;
-  background: #c4b5fd;
-  transition: width 0.25s ease;
-}
-
-a:hover::after {
-  width: 100%;
-}
-
-/* Posts */
-.post {
-  margin-bottom: 64px;
-  transition: transform 0.2s ease;
-}
-
-.post:hover {
-  transform: translateY(-2px);
-}
-
-/* ARTICLE (this is the magic) */
-article {
-  margin-top: 32px;
-}
-
-article p {
-  font-size: 19px;
-  line-height: 1.9;
-  margin-bottom: 22px;
-  color: #d6d3d1;
-}
-
-article h1 {
-  font-size: 38px;
-  margin-top: 40px;
-  margin-bottom: 16px;
-}
-
-article h2 {
-  font-size: 28px;
-  margin-top: 36px;
-  margin-bottom: 14px;
-}
-
-article h3 {
-  font-size: 22px;
-  margin-top: 28px;
-  margin-bottom: 10px;
-}
-
-article ul {
-  margin-left: 20px;
+.section-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
   margin-bottom: 20px;
 }
 
-article li {
+/* posts */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid #222;
+  padding-bottom: 10px;
+  transition: 0.2s;
+}
+
+.post:hover {
+  border-color: var(--accent);
+}
+
+.post-title {
+  font-size: 20px;
+}
+
+.post-date {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ===== BLOG PAGE ===== */
+
+.post-container {
+  max-width: 680px;
+  margin: 120px auto;
+  padding: 0 20px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 40px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+/* title */
+.post-title {
+  font-size: 48px;
   margin-bottom: 10px;
 }
 
-article blockquote {
-  border-left: 3px solid #444;
-  padding-left: 16px;
-  color: #aaa;
-  margin: 28px 0;
-  font-style: italic;
+.post-date {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 40px;
 }
 
-article code {
-  background: #1a1a1a;
-  padding: 3px 6px;
-  border-radius: 4px;
+/* content */
+.post-content {
+  font-size: 18px;
+  line-height: 1.8;
 }
 
-article pre {
-  background: #1a1a1a;
-  padding: 16px;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin-bottom: 24px;
+/* paragraphs */
+.post-content p {
+  margin: 12px 0;
+}
+
+/* headings inside content */
+.post-content h1 {
+  font-size: 28px;
+  margin: 40px 0 10px;
+}
+
+.post-content h2 {
+  font-size: 22px;
+  margin: 30px 0 10px;
+}
+
+.post-content h3 {
+  font-size: 18px;
+  margin: 20px 0 10px;
+}
+
+/* lists */
+.post-content li {
+  margin-left: 20px;
+  margin-bottom: 6px;
+}
+
+/* ===== POEM MODE (optional auto feel) ===== */
+
+/* tighter spacing for poem-like lines */
+.post-content p:has(+ p) {
+  margin-bottom: 4px;
+}
+
+/* BLOG PAGE */
+
+.post-container {
+  max-width: 680px;
+  margin: 120px auto;
+  padding: 0 20px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 40px;
+  color: #9c9c9c;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back:hover {
+  color: #b892ff;
+}
+
+.post-title {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.post-date {
+  color: #9c9c9c;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.post-content {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.post-content p {
+  margin: 10px 0;
+}
+
+/* poem feel */
+.post-content p:has(+ p) {
+  margin-bottom: 4px;
 }
