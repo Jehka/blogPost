@@ -15,7 +15,7 @@ import PostNav from "@/components/PostNav";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://blog-post-xi-sage.vercel.app";
 
 // In any page that fetches from Notion, add:
-export const revalidate = 60; // rebuild this page every 60 seconds
+export const revalidate = 30; // rebuild this page every 60 seconds
 
 export async function generateStaticParams() {
   const posts = await getPosts();

@@ -16,8 +16,6 @@ export default function NowPage() {
           </p>
         </div>
 
-
-
         <section className="now-section">
           <h2>Reading</h2>
           <p>
