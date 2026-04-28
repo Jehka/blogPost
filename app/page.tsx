@@ -42,7 +42,8 @@ export default async function HomePage() {
         <header className="home-header">
           <h1 className="home-title">Theology Subtext</h1>
           <p className="home-subtitle">
-            A space for poetry, theology, and the systems beneath both.
+            Writing on systems, meaning, and the quiet patterns that 
+            shape how we think and build.
           </p>
           <SearchBar posts={searchPosts} />
         </header>
