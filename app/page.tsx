@@ -7,7 +7,8 @@ function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
-
+// In any page that fetches from Notion, add:
+export const revalidate = 60; // rebuild this page every 60 seconds
 export default async function HomePage() {
   const posts = await getPosts();
 
