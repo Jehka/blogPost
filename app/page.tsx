@@ -1,49 +1,82 @@
 import { getPosts } from "@/lib/posts";
 import Link from "next/link";
+import SearchBar from "@/components/SearchBar";
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
 
 export default async function HomePage() {
   const posts = await getPosts();
 
-  // ===== GROUP BY TAGS (SAFE) =====
   const grouped: Record<string, any[]> = {};
-
   posts.forEach((post) => {
     const tags = post.tags || [];
-
-    // if no tags → skip (no "other" nonsense)
-    if (!tags.length) return;
-
+    if (!tags.length) {
+      if (!grouped["uncategorised"]) grouped["uncategorised"] = [];
+      grouped["uncategorised"].push(post);
+      return;
+    }
     tags.forEach((tag: string) => {
       if (!grouped[tag]) grouped[tag] = [];
       grouped[tag].push(post);
     });
   });
 
+  const searchPosts = posts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    date: p.date,
+    tags: p.tags,
+    excerpt: p.excerpt,
+  }));
+
   return (
     <main className="home">
-      {/* BACKGROUND */}
       <div className="bg-layer" />
 
-      {/* CONTENT */}
       <div className="home-content">
-        <h1 className="home-title">Theology Subtext</h1>
+        <header className="home-header">
+          <h1 className="home-title">Theology Subtext</h1>
+          <p className="home-subtitle">
+            A space for poetry, theology, and the systems beneath both.
+          </p>
+          <SearchBar posts={searchPosts} />
+        </header>
 
-        {Object.entries(grouped).map(([tag, posts]) => (
+        {Object.entries(grouped).map(([tag, tagPosts]) => (
           <section key={tag} className="home-section">
-            <h2 className="home-tag">{tag}</h2>
+            <div className="home-section-header">
+              <span className="home-tag-pill">{tag}</span>
+              <span className="home-section-count">
+                {tagPosts.length} post{tagPosts.length !== 1 ? "s" : ""}
+              </span>
+            </div>
 
-            {posts.map((post: any) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="home-link"
-              >
-                <div className="home-post">
-                  <h3>{post.title}</h3>
-                  {post.date && <p>{post.date}</p>}
-                </div>
-              </Link>
-            ))}
+            <div className="home-post-list">
+              {tagPosts.map((post: any) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="home-card">
+                  {post.cover && (
+                    <div
+                      className="home-card-cover"
+                      style={{ backgroundImage: `url(${post.cover})` }}
+                    />
+                  )}
+                  <div className="home-card-body">
+                    <h3 className="home-card-title">{post.title}</h3>
+                    {post.excerpt && (
+                      <p className="home-card-excerpt">{post.excerpt}</p>
+                    )}
+                    {post.date && (
+                      <p className="home-card-date">{formatDate(post.date)}</p>
+                    )}
+                  </div>
+                  <span className="home-card-arrow">→</span>
+                </Link>
+              ))}
+            </div>
           </section>
         ))}
       </div>

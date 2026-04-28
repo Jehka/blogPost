@@ -9,27 +9,34 @@ function generateSlug(text: string) {
 }
 
 export async function getPosts() {
-  const response = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
-    filter: {
-      property: "Published",
-      checkbox: { equals: true },
-    },
-    sorts: [
-      {
-        property: "Date",
-        direction: "descending",
-      },
-    ],
-  });
+  const allResults: any[] = [];
+  let cursor: string | undefined = undefined;
 
-  return response.results.map((post: any) => {
+  do {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_DATABASE_ID!,
+      filter: {
+        property: "Published",
+        checkbox: { equals: true },
+      },
+      sorts: [{ property: "Date", direction: "descending" }],
+      page_size: 100,
+      ...(cursor ? { start_cursor: cursor } : {}),
+    });
+
+    allResults.push(...response.results);
+    cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+  } while (cursor);
+
+  return allResults.map((post: any) => {
+    const titleArr = post.properties.Title?.title ?? [];
     const title =
-      post.properties.Title?.title?.[0]?.plain_text || "Untitled";
+      titleArr.length > 0
+        ? titleArr.map((t: any) => t.plain_text).join("")
+        : "Untitled";
 
     const slugRaw =
       post.properties.Slug?.rich_text?.[0]?.plain_text || title;
-
     const slug = generateSlug(slugRaw);
 
     const tags =
@@ -37,23 +44,30 @@ export async function getPosts() {
         t.name.toLowerCase()
       ) || [];
 
-    // 🔥 COVER IMAGE (Notion)
-    let cover = null;
+    // Excerpt — add a "Excerpt" rich_text property in your Notion DB
+    const excerpt =
+      post.properties.Excerpt?.rich_text
+        ?.map((t: any) => t.plain_text)
+        .join("") || "";
 
-    if (post.cover?.external?.url) {
-      cover = post.cover.external.url;
-    } else if (post.cover?.file?.url) {
-      cover = post.cover.file.url;
-    }
+    let cover: string | null = null;
+    if (post.cover?.external?.url) cover = post.cover.external.url;
+    else if (post.cover?.file?.url) cover = post.cover.file.url;
 
     return {
       id: post.id,
       pageId: post.id,
       slug,
       title,
+      excerpt,
       date: post.properties.Date?.date?.start || "",
       tags,
-      cover, // ✅ new
+      cover,
     };
   });
+}
+
+export async function getPostBySlug(slug: string) {
+  const posts = await getPosts();
+  return posts.find((p) => p.slug === slug.toLowerCase().trim()) ?? null;
 }
