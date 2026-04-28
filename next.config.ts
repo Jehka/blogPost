@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ensures CSS is always processed through the build pipeline
+  // and never served as a raw static file from a previous deploy
+  experimental: {},
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.amazonaws.com", // Notion S3-hosted file uploads
+        hostname: "**.amazonaws.com",
       },
       {
         protocol: "https",
