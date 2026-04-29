@@ -12,7 +12,7 @@ import GiscusComments from "@/components/GiscusComments";
 import RelatedPosts from "@/components/RelatedPosts";
 import PostNav from "@/components/PostNav";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://blog-post-xi-sage.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theologysubtext.vercel.app";
 
 // In any page that fetches from Notion, add:
 export const revalidate = 30; // rebuild this page every 60 seconds

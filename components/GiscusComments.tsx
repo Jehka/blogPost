@@ -11,7 +11,7 @@ declare global {
 
 export default function GiscusComments({ pageTitle = "" }: { pageTitle?: string }) {
   const pathname = usePathname();
-  const pageUrl = `https://blog-post-xi-sage.vercel.app${pathname}`;
+  const pageUrl = `https://theologysubtext.vercel.app${pathname}`;
 
   useEffect(() => {
     if (window.CUSDIS) {

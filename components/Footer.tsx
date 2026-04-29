@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-left">
           <span className="footer-brand">Theology Subtext</span>
-          <span className="footer-copy">&copy; {new Date().getFullYear()} Oshio</span>
+          <span className="footer-copy">&copy; {new Date().getFullYear()} Jehka</span>
         </div>
         <nav className="footer-nav">
           <Link href="/">Posts</Link>
