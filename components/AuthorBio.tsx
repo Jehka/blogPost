@@ -4,7 +4,7 @@ export default function AuthorBio() {
       <div className="author-avatar" />
 
       <div className="author-text">
-        <h3>Oshio</h3>
+        <h3>Jehkaran</h3>
         <p>
           writing on systems, meaning, and the quiet patterns that
           shape how we think and build.
