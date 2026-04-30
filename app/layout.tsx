@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     template: "%s ยท Theology Subtext",
   },
   description: "A personal space for poetry, theology, and the systems beneath both.",
+  verification: {
+    google: "1xeWMmdIqZ6sE7zFSCyiWEZW5LdtPG4dpEgT6ipHu_8",
+  },
   openGraph: {
     siteName: "Theology Subtext",
     type: "website",
