@@ -7,7 +7,7 @@ function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
-
+export const revalidate = 30;
 export default async function HomePage() {
   const posts = await getPosts();
 
