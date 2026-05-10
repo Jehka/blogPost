@@ -7,8 +7,7 @@ function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
-// In any page that fetches from Notion, add:
-export const revalidate = 30; // rebuild this page every 60 seconds
+
 export default async function HomePage() {
   const posts = await getPosts();
 
@@ -41,10 +40,27 @@ export default async function HomePage() {
       <div className="home-content">
         <header className="home-header">
           <h1 className="home-title">Theology Subtext</h1>
+
+          {/* Author note */}
+          <div className="home-author-note">
+            <div className="home-avatar">O</div>
+            <p className="home-author-text">
+              Written by <strong>Jehkaran</strong> - an inquisitive learner, who often observes
+              too closely when it comes to systems now that can be any system.
+            </p>
+          </div>
+
+          {/* Editorial statement */}
+          <blockquote className="home-manifesto">
+            Every system has a subtext. A circuit encodes assumptions about time.
+            A poem encodes assumptions about meaning. This blog is about reading
+            both — and what happens when you refuse to keep them separate.
+          </blockquote>
+
           <p className="home-subtitle">
-            Writing on systems, meaning, and the quiet patterns that 
-            shape how we think and build.
+            Film analysis · Poetry · Theology · Systems thinking
           </p>
+
           <SearchBar posts={searchPosts} />
         </header>
 
