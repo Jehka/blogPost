@@ -59,7 +59,7 @@ export default function GiscusComments({ pageTitle = "" }: { pageTitle?: string 
   borderRadius: "10px",
   padding: "8px",
   border: "1px solid rgba(0,0,0,0.1)",
-  minHeight: "400px"   // ← add this line
+  
 }}>
         <div
           id="cusdis_thread"
