@@ -43,7 +43,7 @@ export default async function HomePage() {
 
           {/* Author note */}
           <div className="home-author-note">
-            <div className="home-avatar">O</div>
+            <div className="home-avatar">J</div>
             <p className="home-author-text">
               Written by <strong>Jehkaran</strong> - an inquisitive learner, who often observes
               too closely when it comes to systems now that can be any system.
@@ -58,7 +58,7 @@ export default async function HomePage() {
           </blockquote>
 
           <p className="home-subtitle">
-            Film analysis · Poetry · Theology · Systems thinking
+            Book Breakdown · Film analysis · Poetry · Theology · Systems thinking
           </p>
 
           <SearchBar posts={searchPosts} />
