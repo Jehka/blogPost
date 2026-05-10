@@ -891,6 +891,11 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: var(--faint);
 }
+/* ===== CUSDIS IFRAME FIX ===== */
+#cusdis_thread iframe {
+  min-height: 600px !important;
+  width: 100% !important;
+}
 
 /* ===================================================================
    LIGHT THEME
