@@ -52,9 +52,9 @@ export default async function HomePage() {
 
           {/* Editorial statement */}
           <blockquote className="home-manifesto">
-            Every system has a subtext. A circuit encodes assumptions about time.
-            A poem encodes assumptions about meaning. This blog is about reading
-            both — and what happens when you refuse to keep them separate.
+           The relationship between contraint and meaning - what surrounds us, what suffocates us,
+           what ship we embark, what do we abanodon, what do we live for the sake of it, what do
+           we dislike because of its surface appreance. 
           </blockquote>
 
           <p className="home-subtitle">
