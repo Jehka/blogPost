@@ -11,6 +11,7 @@ import TableOfContents from "@/components/TableOfContents";
 import GiscusComments from "@/components/GiscusComments";
 import RelatedPosts from "@/components/RelatedPosts";
 import PostNav from "@/components/PostNav";
+import Newsletter from "@/components/Newsletter";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theologysubtext.vercel.app";
 
@@ -134,7 +135,7 @@ export default async function BlogPost({
             currentTags={post.tags ?? []}
             allPosts={allPosts}
           />
-
+          <Newsletter />
           <GiscusComments />
         </article>
 

@@ -1,6 +1,7 @@
 import { getPosts } from "@/lib/posts";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
+import Newsletter from "@/components/Newsletter";
 
 function formatDate(dateStr: string) {
   if (!dateStr) return "";
@@ -97,6 +98,8 @@ export default async function HomePage() {
             </div>
           </section>
         ))}
+                  <Newsletter />
+
       </div>
     </main>
   );
