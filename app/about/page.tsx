@@ -21,7 +21,7 @@ export default function AboutPage() {
 
         <section className="about-section">
           <p>
-            As Guru Nanak said that Sikh is a person that should be 
+            As Guru Nanak Dev Ji said that Sikh is a person that should be 
             perpetually evolving, learning - theologically, logically,
             emotionally, pragmatically and most importantly humanly.
           </p>

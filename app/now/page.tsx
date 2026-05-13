@@ -27,9 +27,9 @@ export default function NowPage() {
         <section className="now-section">
           <h2>Thinking about</h2>
           <p>
-            The relationship between contraint and meaning - what surrounds us, what suffocates us,
-            what ship we embark, what do we abanodon, what do we live for the sake of it, what do
-            we dislike because of its surface appreance.
+            The relationship between constraint and meaning - what surrounds us, what suffocates us,
+           what ship we embark, what do we abandon, what do we live for the sake of it, what do
+           we dislike because of its surface appearance.
           </p>
         </section>
 

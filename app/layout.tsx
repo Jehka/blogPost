@@ -5,7 +5,7 @@ import { getPosts } from "@/lib/posts";
 import Sidebar from "@/components/Sidebar";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://blog-post-xi-sage.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theologysubtext.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
