@@ -53,9 +53,9 @@ export default async function HomePage() {
 
           {/* Editorial statement */}
           <blockquote className="home-manifesto">
-           The relationship between contraint and meaning - what surrounds us, what suffocates us,
-           what ship we embark, what do we abanodon, what do we live for the sake of it, what do
-           we dislike because of its surface appreance. 
+           The relationship between constraint and meaning - what surrounds us, what suffocates us,
+           what ship we embark, what do we abandon, what do we live for the sake of it, what do
+           we dislike because of its surface appearance. 
           </blockquote>
 
           <p className="home-subtitle">
