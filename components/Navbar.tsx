@@ -9,9 +9,9 @@ export default function Navbar() {
           Theology Subtext
         </Link>
       </div>
-
       <div className="nav-right">
         <Link href="/">Home</Link>
+        <Link href="/start-here">Start Here</Link>
         <Link href="/about">About</Link>
         <Link href="/now">Now</Link>
         <ThemeToggle />

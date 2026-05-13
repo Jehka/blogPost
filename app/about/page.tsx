@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,6 +13,17 @@ export default function AboutPage() {
       <div className="about-content">
 
         <header className="about-header">
+          {/* To add your photo:
+              1. Drop your image into /public/oshio.jpg
+              2. Remove the about-avatar div below
+              3. Uncomment the Image tag */}
+          { <Image
+            src="/oshio.JPEG"
+            alt="Jehkaran"
+            width={72}
+            height={72}
+            className="about-photo"
+          /> }
           <div className="about-avatar">J</div>
           <div>
             <h1 className="about-title">Jehkaran</h1>
@@ -21,7 +33,7 @@ export default function AboutPage() {
 
         <section className="about-section">
           <p>
-            As Guru Nanak Dev Ji said that Sikh is a person that should be 
+            As Guru Nanak Dev Ji said that Sikh is a person that should be
             perpetually evolving, learning - theologically, logically,
             emotionally, pragmatically and most importantly humanly.
           </p>
@@ -30,7 +42,6 @@ export default function AboutPage() {
             of life and what actually lives in the subtext of things,
             now this could be me in a poem, a breakdown or even an article.
           </p>
-          
         </section>
 
         <section className="about-section">
@@ -46,7 +57,7 @@ export default function AboutPage() {
           <p>
             &ldquo;Subtext&rdquo; because nothing is only what it appears to
             be. What appears to be on the surface, can often be misleading.
-            In a world where clarity is of the utmost importance, "subtext"
+            In a world where clarity is of the utmost importance, &ldquo;subtext&rdquo;
             helps me (and perhaps even you) gain some of that clarity.
           </p>
         </section>
@@ -67,7 +78,8 @@ export default function AboutPage() {
         </section>
 
         <div className="about-links">
-          <Link href="/" className="about-cta">Read the posts →</Link>
+          <Link href="/start-here" className="about-cta">Start reading →</Link>
+          <Link href="/" className="about-cta-ghost">All posts</Link>
           <Link href="/now" className="about-cta-ghost">What I&apos;m doing now</Link>
         </div>
 

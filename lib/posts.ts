@@ -44,11 +44,13 @@ export async function getPosts() {
         t.name.toLowerCase()
       ) || [];
 
-    // Excerpt — add a "Excerpt" rich_text property in your Notion DB
     const excerpt =
       post.properties.Excerpt?.rich_text
         ?.map((t: any) => t.plain_text)
         .join("") || "";
+
+    // Featured checkbox — add "Featured" checkbox property in Notion
+    const featured = post.properties.Featured?.checkbox ?? false;
 
     let cover: string | null = null;
     if (post.cover?.external?.url) cover = post.cover.external.url;
@@ -60,6 +62,7 @@ export async function getPosts() {
       slug,
       title,
       excerpt,
+      featured,
       date: post.properties.Date?.date?.start || "",
       tags,
       cover,
