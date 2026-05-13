@@ -7,8 +7,13 @@ import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theologysubtext.vercel.app";
 
+
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: "/favicon.svg",
+  },
   title: {
     default: "Theology Subtext",
     template: "%s ยท Theology Subtext",
