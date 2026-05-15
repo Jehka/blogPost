@@ -1687,3 +1687,110 @@ body,
   .start-here-title { font-size: 36px; }
   .start-here-content { padding: 40px 20px 80px; }
 }
+/* ===== NOTION QUOTE BLOCK ===== */
+.notion-quote {
+  position: relative;
+  margin: 2em 0;
+  padding: 24px 28px;
+  background: var(--bg-raised);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.notion-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -16px;
+  left: 20px;
+  font-family: var(--font-serif);
+  font-size: 72px;
+  color: var(--accent);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.notion-quote-text {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.notion-quote-cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-style: normal;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+/* ===== SINGLE CALLOUT (aside / highlight) ===== */
+.notion-callout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 2em 0;
+  padding: 20px 24px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 10px;
+}
+
+.notion-callout-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.7;
+}
+
+.notion-callout-body {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text);
+  flex: 1;
+}
+
+.notion-callout-body p { margin-bottom: 0; }
+
+/* ===== POEM (multiple consecutive callouts) ===== */
+.notion-poem {
+  margin: 2.5em 0;
+  padding: 32px 36px;
+  border-left: 2px solid var(--accent);
+  background: var(--bg-raised);
+  border-radius: 0 10px 10px 0;
+}
+
+.notion-poem-stanza {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.notion-poem-stanza:last-child {
+  margin-bottom: 0;
+}
+
+.notion-poem-stanza-body {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.85;
+  color: var(--text);
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.notion-poem-stanza-body p { margin-bottom: 0; }
+
+/* Light theme */
+[data-theme="light"] .notion-callout {
+  background: rgba(138,92,46,0.08);
+  border-color: rgba(138,92,46,0.2);
+}
+
+[data-theme="light"] .notion-poem {
+  background: rgba(138,92,46,0.04);
+}
