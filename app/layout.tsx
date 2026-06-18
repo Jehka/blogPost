@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: "A personal space for poetry, theology, and the systems beneath both.",
   verification: {
-    google: "1xeWMmdIqZ6sE7zFSCyiWEZW5LdtPG4dpEgT6ipHu_8",
+    google: "Y-QzU0dLJGpUIv1vODB_7G_JqautWoiJzxB9ukDfY7w",
   },
   openGraph: {
     siteName: "Theology Subtext",

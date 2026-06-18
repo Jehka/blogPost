@@ -8,7 +8,7 @@ export default function NowPage() {
     <main className="now-page">
       <div className="now-content">
         <div className="now-header">
-          <p className="now-eyebrow">Last updated April 2026</p>
+          <p className="now-eyebrow">Last updated June 2026</p>
           <h1 className="now-title">Now</h1>
           <p className="now-lead">
             A snapshot of what I&apos;m doing, reading, and thinking about.

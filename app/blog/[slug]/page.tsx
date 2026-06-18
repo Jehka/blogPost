@@ -13,7 +13,7 @@ import RelatedPosts from "@/components/RelatedPosts";
 import PostNav from "@/components/PostNav";
 import Newsletter from "@/components/Newsletter";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theologysubtext.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.theologysubtext.space";
 
 // In any page that fetches from Notion, add:
 export const revalidate = 30; // rebuild this page every 30 seconds
