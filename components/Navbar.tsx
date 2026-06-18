@@ -14,6 +14,7 @@ export default function Navbar() {
         <Link href="/start-here">Start Here</Link>
         <Link href="/about">About</Link>
         <Link href="/now">Now</Link>
+        <Link href="/portfolio">Portfolio</Link>
         <ThemeToggle />
       </div>
     </nav>

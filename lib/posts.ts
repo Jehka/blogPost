@@ -8,17 +8,23 @@ function generateSlug(text: string) {
     .replace(/[^\w-]/g, "");
 }
 
-export async function getPosts() {
+export async function getPosts(section: "Blog" | "Technical" | "all" = "Blog") {
   const allResults: any[] = [];
   let cursor: string | undefined = undefined;
+
+  const filter: any = {
+    and: [
+      { property: "Published", checkbox: { equals: true } },
+      ...(section !== "all"
+        ? [{ property: "Section", select: { equals: section } }]
+        : []),
+    ],
+  };
 
   do {
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
-      filter: {
-        property: "Published",
-        checkbox: { equals: true },
-      },
+      filter,
       sorts: [{ property: "Date", direction: "descending" }],
       page_size: 100,
       ...(cursor ? { start_cursor: cursor } : {}),
@@ -49,8 +55,10 @@ export async function getPosts() {
         ?.map((t: any) => t.plain_text)
         .join("") || "";
 
-    // Featured checkbox — add "Featured" checkbox property in Notion
     const featured = post.properties.Featured?.checkbox ?? false;
+
+    const section =
+      post.properties.Section?.select?.name || "Blog";
 
     let cover: string | null = null;
     if (post.cover?.external?.url) cover = post.cover.external.url;
@@ -63,6 +71,7 @@ export async function getPosts() {
       title,
       excerpt,
       featured,
+      section,
       date: post.properties.Date?.date?.start || "",
       tags,
       cover,
@@ -71,6 +80,6 @@ export async function getPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
-  const posts = await getPosts();
+  const posts = await getPosts("all");
   return posts.find((p) => p.slug === slug.toLowerCase().trim()) ?? null;
 }
