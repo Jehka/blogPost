@@ -1,6 +1,7 @@
 import { getPosts } from "@/lib/posts";
 import Link from "next/link";
 import type { Metadata } from "next";
+import SearchBar from "@/components/SearchBar";
 
 export const metadata: Metadata = {
   title: "Technical Writing",
@@ -8,6 +9,18 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 60;
+
+const posts = await getPosts("Technical");
+
+const searchPosts = posts.map((p: any) => ({
+  slug: p.slug,
+  title: p.title,
+  date: p.date,
+  tags: p.tags,
+  excerpt: p.excerpt,
+}));
+
+<SearchBar posts={searchPosts} />
 
 function formatDate(dateStr: string) {
   if (!dateStr) return "";

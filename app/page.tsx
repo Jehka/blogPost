@@ -10,7 +10,8 @@ function formatDate(dateStr: string) {
 }
 export const revalidate = 30;
 export default async function HomePage() {
-  const posts = await getPosts();
+  const posts = await getPosts("Blog");
+  const allPosts = await getPosts("all");
 
   const grouped: Record<string, any[]> = {};
   posts.forEach((post) => {
@@ -26,13 +27,13 @@ export default async function HomePage() {
     });
   });
 
-  const searchPosts = posts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    date: p.date,
-    tags: p.tags,
-    excerpt: p.excerpt,
-  }));
+  const searchPosts = allPosts.map((p) => ({
+  slug: p.slug,
+  title: p.title,
+  date: p.date,
+  tags: p.tags,
+  excerpt: p.excerpt,
+}));
 
   return (
     <main className="home">

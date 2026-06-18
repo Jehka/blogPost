@@ -45,6 +45,9 @@ export default function Sidebar({ tags = [], recentPosts = [] }: SidebarProps) {
           <Link href="/portfolio" className="sb-link">
   <span className="sb-link-icon">◆</span> Portfolio
 </Link>
+<Link href="/technical" className="sb-link">
+  <span className="sb-link-icon">⬡</span> Technical
+</Link>
           <a href="/feed.xml" className="sb-link" target="_blank" rel="noopener noreferrer">
             <span className="sb-link-icon">⊕</span> RSS Feed
           </a>
