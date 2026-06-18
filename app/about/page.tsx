@@ -14,7 +14,7 @@ export default function AboutPage() {
 
         <header className="about-header">
           <Image
-            src="/oshio.JPEG"
+            src="/jeh.JPEG"
             alt="Jehkaran"
             width={72}
             height={72}

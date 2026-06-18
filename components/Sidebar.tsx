@@ -27,7 +27,7 @@ export default function Sidebar({ tags = [], recentPosts = [] }: SidebarProps) {
         {/* Author card */}
         <div className="sb-author">
           <Image
-  src="/oshio.JPEG"
+  src="/jeh.JPEG"
   alt="Jehkaran"
   width={64}
   height={64}
