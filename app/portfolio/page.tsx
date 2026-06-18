@@ -53,7 +53,7 @@ const skills = [
 ];
 
 const certifications = [
-  "ISWDP Level 1 — Samsung / IISc / Synopsys SARA (88%)",
+  "ISWDP Samsung / IISc / Synopsys SARA",
   "Control Systems Fundamentals — Siemens",
   "ERP Systems Training — Shoppers Drug Mart",
 ];
@@ -93,7 +93,8 @@ export default async function PortfolioPage() {
             An inquisitive learner who observes too closely when it comes to
             systems — any system. Prior diploma in Electronics Engineering
             Technology from Seneca College, Canada. Targeting VLSI and
-            semiconductor roles at Qualcomm, AMD, and Micron.
+            semiconductor roles specialising RTL, and Physical design
+            FPGA design engineering.
           </p>
         </section>
 
