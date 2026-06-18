@@ -192,7 +192,7 @@ export default async function PortfolioPage() {
               <span className="portfolio-link-icon">✦</span> Blog — Theology Subtext
             </Link>
             {/* Uncomment after adding resume.pdf to /public */}
-            {<a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--accent">
+            {<a href="resume.pdf" target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--accent">
               <span className="portfolio-link-icon">↓</span> Download Resume (PDF)
             </a>}
           </div>
