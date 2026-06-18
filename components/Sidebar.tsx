@@ -42,6 +42,9 @@ export default function Sidebar({ tags = [], recentPosts = [] }: SidebarProps) {
           <Link href="/" className="sb-link"><span className="sb-link-icon">◈</span> All Posts</Link>
           <Link href="/about" className="sb-link"><span className="sb-link-icon">◎</span> About</Link>
           <Link href="/now" className="sb-link"><span className="sb-link-icon">◉</span> Now</Link>
+          <Link href="/portfolio" className="sb-link">
+  <span className="sb-link-icon">◆</span> Portfolio
+</Link>
           <a href="/feed.xml" className="sb-link" target="_blank" rel="noopener noreferrer">
             <span className="sb-link-icon">⊕</span> RSS Feed
           </a>
