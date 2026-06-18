@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getPosts } from "@/lib/posts";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Portfolio — Jehkaran Singh",
@@ -66,7 +67,14 @@ export default async function PortfolioPage() {
 
         {/* Hero */}
         <header className="portfolio-hero">
-          <div className="about-avatar" style={{ width: 64, height: 64, fontSize: 28, flexShrink: 0 }}>J</div>
+          <Image
+  src="/oshio.JPEG"
+  alt="Jehkaran"
+  width={64}
+  height={64}
+  className="about-photo"
+  priority
+/>
           <div>
             <h1 className="portfolio-name">Jehkaran Singh</h1>
             <p className="portfolio-role">

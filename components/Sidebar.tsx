@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 interface SidebarProps {
   tags?: string[];
@@ -25,7 +26,14 @@ export default function Sidebar({ tags = [], recentPosts = [] }: SidebarProps) {
       <aside className={`sidebar ${collapsed ? "sidebar--collapsed" : ""}`}>
         {/* Author card */}
         <div className="sb-author">
-          <div className="sb-avatar"><span>J</span></div>
+          <Image
+  src="/oshio.JPEG"
+  alt="Jehkaran"
+  width={64}
+  height={64}
+  className="about-photo"
+  priority
+/>
           <div className="sb-author-text">
             <p className="sb-name"></p>
             <p className="sb-bio">
