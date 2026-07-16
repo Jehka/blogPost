@@ -7,53 +7,71 @@ export const metadata: Metadata = {
 };
 
 const projects = [
+  // ── MINERVA ──────────────────────────────────────────────────────
   {
-    title: "Multichannel FPGA Signal Acquisition System",
+    title: "MINERVA P1 — CDC Heterogeneous FIFO Arbiter & Timestamp Engine",
     description:
-      "Full RTL pipeline on Zedboard: MCP3204 SPI ADC → channel mux FSM → per-channel FIR filtering → UART framer → packet FIFO → UART TX. Python monitor and MATLAB analysis on the PC side.",
-    tags: ["FPGA", "Verilog", "SPI", "UART", "DSP"],
+      "Clock-domain-crossing arbitration engine in SystemVerilog featuring a round-robin arbiter, heterogeneous FIFO depth management, and per-channel timestamp tagging. Synthesized on Xilinx XC7Z020 (321 LUTs, 365 FFs, 4× RAMB36). Hardware-verified via UART on Zedboard using Vivado 2025.1.",
+    tags: ["SystemVerilog", "CDC", "FIFO", "Vivado", "Zedboard", "UART"],
     status: "Complete",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/minerva-p1",
   },
   {
-    title: "RISC-V CPU with AES ISA Extension",
+    title: "MINERVA P2 — 5-Stage Pipelined RV32I CPU",
     description:
-      "Custom RISC-V core with extended instruction set for AES operations. Designed for hardware-accelerated cryptographic workloads.",
-    tags: ["RISC-V", "Verilog", "CPU Design", "AES"],
+      "32-bit RISC-V CPU in SystemVerilog with a classic 5-stage pipeline (IF/ID/EX/MEM/WB), full data hazard forwarding (EX-EX, MEM-EX), load-use stall detection, and branch flush. Hardware-verified on Zedboard running bubble sort with sorted output confirmed over UART.",
+    tags: ["SystemVerilog", "RISC-V", "Pipelining", "Vivado", "Zedboard", "UART"],
     status: "Complete",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/minerva-p2",
   },
   {
-    title: "AXI-Lite Hardware Accelerator",
+    title: "MINERVA P3 — Cache Controller & DMA Engine",
     description:
-      "AXI-Lite compliant hardware accelerator with C firmware driver. UVM testbench for verification. Cadence Innovus PnR on FreePDK45.",
-    tags: ["AXI", "UVM", "Cadence", "Verification"],
-    status: "Complete",
-    github: "https://github.com/Jehka",
-  },
-  {
-    title: "Elevator FSM — FCFS vs SSTF",
-    description:
-      "RTL implementation comparing First Come First Served and Shortest Seek Time First scheduling algorithms for elevator control.",
-    tags: ["FSM", "Verilog", "Algorithms"],
-    status: "Complete",
-    github: "https://github.com/Jehka",
-  },
-  {
-    title: "CMOS Bandgap Reference",
-    description:
-      "Temperature-independent voltage reference circuit using bipolar junction transistors in CMOS process.",
-    tags: ["Analog", "CMOS", "Circuit Design"],
-    status: "Complete",
-    github: "https://github.com/Jehka",
-  },
-  {
-    title: "Scatter-Gather DMA Engine",
-    description:
-      "High-throughput DMA engine with scatter-gather capability. AXI4 master interface, configurable burst length, interrupt-driven completion.",
-    tags: ["DMA", "AXI4", "RTL Design"],
+      "Direct-mapped cache controller with hit/miss handling and a scatter-gather DMA engine. Sits between the P2 RISC-V CPU and a slower backing memory. AXI4 master interface, configurable burst length, interrupt-driven completion.",
+    tags: ["SystemVerilog", "Cache", "DMA", "AXI4", "RTL Design"],
     status: "In Progress",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/minerva-p3",
+  },
+  {
+    title: "MINERVA P4 — AXI Crossbar Interconnect",
+    description:
+      "Parameterizable AXI crossbar connecting the RISC-V CPU, cache controller, DMA engine, and peripherals. Multi-master multi-slave arbitration with address decoding and full AXI4 handshake compliance.",
+    tags: ["SystemVerilog", "AXI4", "Interconnect", "RTL Design"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/minerva-p4",
+  },
+  {
+    title: "MINERVA P5 — Fault Injection Framework & OpenLane Tapeout",
+    description:
+      "Hardware fault injection framework targeting pipeline registers of the P2 RISC-V CPU. Single-event upset simulation with error detection and correction circuits. Full RTL-to-GDS flow through OpenLane on the SKY130 PDK.",
+    tags: ["SystemVerilog", "Fault Injection", "OpenLane", "SKY130", "RTL-to-GDS"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/minerva-p5",
+  },
+  // ── Standalone ───────────────────────────────────────────────────
+  {
+    title: "AXI-Lite Hardware Accelerator with Firmware Control",
+    description:
+      "AXI-Lite slave with register file, control FSM, and datapath. Synthesized in Vivado, verified via directed testbenches, driven by bare-metal firmware on FPGA. MMIO address decode; FSM: IDLE→EXEC→DONE; firmware polls status register for completion.",
+    tags: ["AXI-Lite", "Verilog", "Vivado", "Firmware", "MMIO"],
+    status: "Complete",
+    github: "https://github.com/Jehka/axi-lite-accelerator",
+  },
+  {
+    title: "Multichannel Signal Processing System",
+    description:
+      "3-channel round-robin SPI ADC pipeline with per-channel AXI-Lite accelerators for FIR filtering. On-fabric DSP algorithms for edge computing without host dependency. Arch: Arbitrated SPI master → dedicated FIR blocks → central DSP core via AXI-Lite fabric.",
+    tags: ["FPGA", "SPI", "FIR", "AXI-Lite", "DSP"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/multichannel-dsp",
+  },
+  {
+    title: "FPGA-Based Optical Sensor Acquisition System",
+    description:
+      "Mixed-signal FPGA pipeline: SPI ADC master, synchronous FIFO, UART TX in Verilog RTL. Deterministic 1 kHz streaming. 16-deep FIFO decouples acquisition/UART domains. CDC via gray-coded pointers, verified with ModelSim directed testbench.",
+    tags: ["FPGA", "Verilog", "SPI", "UART", "CDC", "ModelSim"],
+    status: "Complete",
+    github: "https://github.com/Jehka/optical-sensor-fpga",
   },
 ];
 

@@ -11,21 +11,55 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 const projects = [
+  // ── MINERVA ──────────────────────────────────────────────────────
   {
-    title: "RISC-V CPU with Custom AES ISA Extension",
+    title: "MINERVA P1 — CDC Heterogeneous FIFO Arbiter & Timestamp Engine",
     description:
-      "Pipelined RV32I in Verilog with a custom AES instruction — SubBytes/ShiftRows/MixColumns datapath in the execute stage. 5-stage pipeline with hazard detection and forwarding unit. AES in R-type format with dedicated combinational crypto datapath bypassing the ALU. UART plaintext-to-ciphertext demo on FPGA.",
-    tags: ["Verilog", "RISC-V", "AES", "FPGA", "Pipelining"],
-    status: "In Progress",
-    github: "https://github.com/Jehka",
+      "Clock-domain-crossing arbitration engine in SystemVerilog featuring a round-robin arbiter, heterogeneous FIFO depth management, and per-channel timestamp tagging. Synthesized on Xilinx XC7Z020 (321 LUTs, 365 FFs, 4× RAMB36). Hardware-verified via UART on Zedboard using Vivado 2025.1.",
+    tags: ["SystemVerilog", "CDC", "FIFO", "Vivado", "Zedboard", "UART"],
+    status: "Complete",
+    github: "https://github.com/Jehka/minerva-p1",
   },
+  {
+    title: "MINERVA P2 — 5-Stage Pipelined RV32I CPU",
+    description:
+      "32-bit RISC-V CPU in SystemVerilog with a classic 5-stage pipeline (IF/ID/EX/MEM/WB), full data hazard forwarding (EX-EX, MEM-EX), load-use stall detection, and branch flush. Hardware-verified on Zedboard running bubble sort with sorted output confirmed over UART.",
+    tags: ["SystemVerilog", "RISC-V", "Pipelining", "Vivado", "Zedboard", "UART"],
+    status: "Complete",
+    github: "https://github.com/Jehka/minerva-p2",
+  },
+  {
+    title: "MINERVA P3 — Cache Controller & DMA Engine",
+    description:
+      "Direct-mapped cache controller with hit/miss handling and a scatter-gather DMA engine. Sits between the P2 RISC-V CPU and a slower backing memory. AXI4 master interface, configurable burst length, interrupt-driven completion.",
+    tags: ["SystemVerilog", "Cache", "DMA", "AXI4", "RTL Design"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/minerva-p3",
+  },
+  {
+    title: "MINERVA P4 — AXI Crossbar Interconnect",
+    description:
+      "Parameterizable AXI crossbar connecting the RISC-V CPU, cache controller, DMA engine, and peripherals. Multi-master multi-slave arbitration with address decoding and full AXI4 handshake compliance.",
+    tags: ["SystemVerilog", "AXI4", "Interconnect", "RTL Design"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/minerva-p4",
+  },
+  {
+    title: "MINERVA P5 — Fault Injection Framework & OpenLane Tapeout",
+    description:
+      "Hardware fault injection framework targeting pipeline registers of the P2 RISC-V CPU. Single-event upset simulation with error detection and correction circuits. Full RTL-to-GDS flow through OpenLane on the SKY130 PDK.",
+    tags: ["SystemVerilog", "Fault Injection", "OpenLane", "SKY130", "RTL-to-GDS"],
+    status: "In Progress",
+    github: "https://github.com/Jehka/minerva-p5",
+  },
+  // ── Standalone ───────────────────────────────────────────────────
   {
     title: "AXI-Lite Hardware Accelerator with Firmware Control",
     description:
       "AXI-Lite slave with register file, control FSM, and datapath. Synthesized in Vivado, verified via directed testbenches, driven by bare-metal firmware on FPGA. MMIO address decode; FSM: IDLE→EXEC→DONE; firmware polls status register for completion.",
     tags: ["AXI-Lite", "Verilog", "Vivado", "Firmware", "MMIO"],
     status: "Complete",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/axi-lite-accelerator",
   },
   {
     title: "Multichannel Signal Processing System",
@@ -33,7 +67,7 @@ const projects = [
       "3-channel round-robin SPI ADC pipeline with per-channel AXI-Lite accelerators for FIR filtering. On-fabric DSP algorithms for edge computing without host dependency. Arch: Arbitrated SPI master → dedicated FIR blocks → central DSP core via AXI-Lite fabric.",
     tags: ["FPGA", "SPI", "FIR", "AXI-Lite", "DSP"],
     status: "In Progress",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/multichannel-dsp",
   },
   {
     title: "FPGA-Based Optical Sensor Acquisition System",
@@ -41,7 +75,7 @@ const projects = [
       "Mixed-signal FPGA pipeline: SPI ADC master, synchronous FIFO, UART TX in Verilog RTL. Deterministic 1 kHz streaming. 16-deep FIFO decouples acquisition/UART domains. CDC via gray-coded pointers, verified with ModelSim directed testbench.",
     tags: ["FPGA", "Verilog", "SPI", "UART", "CDC", "ModelSim"],
     status: "Complete",
-    github: "https://github.com/Jehka",
+    github: "https://github.com/Jehka/optical-sensor-fpga",
   },
 ];
 
@@ -68,13 +102,13 @@ export default async function PortfolioPage() {
         {/* Hero */}
         <header className="portfolio-hero">
           <Image
-  src="/oshio.JPEG"
-  alt="Jehkaran"
-  width={64}
-  height={64}
-  className="about-photo"
-  priority
-/>
+            src="/oshio.JPEG"
+            alt="Jehkaran"
+            width={64}
+            height={64}
+            className="about-photo"
+            priority
+          />
           <div>
             <h1 className="portfolio-name">Jehkaran Singh</h1>
             <p className="portfolio-role">
@@ -192,10 +226,9 @@ export default async function PortfolioPage() {
             <Link href="/" className="portfolio-link">
               <span className="portfolio-link-icon">✦</span> Blog — Theology Subtext
             </Link>
-            {/* Uncomment after adding resume.pdf to /public */}
-            {<a href="/jehkaran-resume.pdf" target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--accent">
+            <a href="/jehkaran-resume.pdf" target="_blank" rel="noopener noreferrer" className="portfolio-link portfolio-link--accent">
               <span className="portfolio-link-icon">↓</span> Download Resume (PDF)
-            </a>}
+            </a>
           </div>
         </section>
 
