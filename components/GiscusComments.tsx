@@ -11,7 +11,7 @@ declare global {
 
 export default function GiscusComments({ pageTitle = "" }: { pageTitle?: string }) {
   const pathname = usePathname();
-  const pageUrl = `https://www.theologysubtext.space${pathname}`;
+  const pageUrl = `https://theologysubtext.space${pathname}`;
 
   useEffect(() => {
     if (window.CUSDIS) {

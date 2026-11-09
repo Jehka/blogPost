@@ -39,6 +39,10 @@ export async function generateMetadata({
       ? `${post.tags.join(", ")} · ${post.date}`
       : post.date || "Theology Subtext");
 
+  const ogImage = `https://theologysubtext.space/og?title=${encodeURIComponent(
+    post.title
+  )}&tags=${encodeURIComponent((post.tags || []).join(","))}`;
+
   return {
     title: post.title,
     description,
@@ -50,15 +54,13 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.date || undefined,
       tags: post.tags,
-      ...(post.cover
-        ? { images: [{ url: post.cover, width: 1200, height: 630, alt: post.title }] }
-        : {}),
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
-      card: post.cover ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title: post.title,
       description,
-      ...(post.cover ? { images: [post.cover] } : {}),
+      images: [ogImage],
     },
   };
 }

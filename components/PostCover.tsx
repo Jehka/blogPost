@@ -5,9 +5,14 @@ export default function PostCover({ cover }: { cover?: string }) {
 
   return (
     <div className="cover-wrapper">
-      <div
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={cover}
+        alt=""
         className="cover-full"
-        style={{ backgroundImage: `url(${cover})` }}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
       />
     </div>
   );

@@ -79,9 +79,13 @@ export default async function HomePage() {
               {tagPosts.map((post: any) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="home-card">
                   {post.cover && (
-                    <div
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={post.cover}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="home-card-cover"
-                      style={{ backgroundImage: `url(${post.cover})` }}
                     />
                   )}
                   <div className="home-card-body">

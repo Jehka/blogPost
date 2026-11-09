@@ -181,7 +181,7 @@ export function renderBlocks(blocks: any[], isPoetry = false) {
           elements.push(
             <figure key={index}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={url} alt={caption} style={{ maxWidth: "100%", borderRadius: "8px" }} />
+              <img src={url} alt={caption} loading="lazy" decoding="async" style={{ maxWidth: "100%", borderRadius: "8px" }} />
               {caption && <figcaption>{caption}</figcaption>}
             </figure>
           );
